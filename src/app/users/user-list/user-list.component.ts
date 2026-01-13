@@ -10,7 +10,7 @@ export interface User {
   imports: [],
    template: `
     <ul>
-      <li *ngFor="let user of users">{{ user.name }}</li>
+      <li *ngFor="let user of usersNames">{{ user.name }}</li>
     </ul>
   `,
   styleUrl: './user-list.component.scss'
@@ -18,12 +18,21 @@ export interface User {
 
 
 export class UserListComponent {
-  users: User[] = [];
+  users: any[] = [];
+  usersNames: any[] = [];
 
   loadUsers() {
-    this.users = [
+    this.usersNames = [
       { id: 1, name: 'Tejaswini' },
       { id: 2, name: 'Riddhish' }
     ];
+  }
+
+  ngOnInit() {
+    fetch('/api/users')
+      .then(res => res.json())
+      .then(data => {
+        this.users = data;
+      });
   }
 }
