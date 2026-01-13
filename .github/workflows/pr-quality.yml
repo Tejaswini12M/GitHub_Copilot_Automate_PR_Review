@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+    types: [opened, synchronize, reopened]
 
 jobs:
   quality-check:
@@ -24,10 +25,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # # 4. Enforce TypeScript rules
-      # - name: Run ESLint (TypeScript)
-      #   run: npx eslint "src/**/*.ts"
+      # 4. Enforce TypeScript rules
+      - name: Run ESLint (TypeScript)
+        run: npx eslint "src/**/*.ts"
 
-      # # 5. Enforce SCSS rules
-      # - name: Run Stylelint (SCSS)
-      #   run: npx stylelint "src/**/*.scss"
+      # 5. Enforce SCSS rules
+      - name: Run Stylelint (SCSS)
+        run: npx stylelint "src/**/*.scss"
